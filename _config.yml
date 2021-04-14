@@ -7,7 +7,7 @@
 
 # Site Settings
 locale                   : "en-US"
-title                    : "Frank Röder - PhD student"
+title                    : "Frank Röder"
 title_separator          : "-"
 name                     : &name "Frank Röder"
 description              : &description "personal description"
@@ -175,9 +175,6 @@ kramdown:
 
 # Collections
 collections:
-  publications:
-    output: true
-    permalink: /:collection/:path/
   music:
     output: true
     permalink: /:collection/:path/
@@ -240,14 +237,14 @@ plugins:
   - jekyll-paginate
   - jekyll-sitemap
   - jekyll-gist
-  - jekyll-feed
+  # - jekyll-feed
   - jekyll-redirect-from
 # mimic GitHub Pages with --safe
 whitelist:
   - jekyll-paginate
   - jekyll-sitemap
   - jekyll-gist
-  - jekyll-feed
+  # - jekyll-feed
   - jemoji
 
 

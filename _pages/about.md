@@ -9,4 +9,5 @@ redirect_from:
 ---
 
 
-I am currently a research associate at the [Knowledge Technology Group](https://www.inf.uni-hamburg.de/en/inst/ab/wtm/) at the [University of Hamburg](https://www.inf.uni-hamburg.de/en).
+I am currently a [PhD student](https://www.inf.uni-hamburg.de/en/inst/ab/wtm/people/roeder.html) at the [University of Hamburg](https://www.inf.uni-hamburg.de/en), working in the [Knowledge Technology Group](https://www.inf.uni-hamburg.de/en/inst/ab/wtm/).
+My research interests include cognitive robotics, reinforcement learning, and natural language processing.
