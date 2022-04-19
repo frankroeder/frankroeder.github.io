@@ -9,5 +9,11 @@ redirect_from:
 ---
 
 
-I am currently a [Ph.D. student](https://www.inf.uni-hamburg.de/en/inst/ab/wtm/people/roeder.html) at the [University of Hamburg](https://www.inf.uni-hamburg.de/en), working in the [Knowledge Technology Group](https://www.inf.uni-hamburg.de/en/inst/ab/wtm/) and participating in the [IDEAS](https://www.inf.uni-hamburg.de/en/inst/ab/wtm/about/news/project-ideas.html) and [LeCAREbot](https://www.inf.uni-hamburg.de/en/inst/ab/wtm/research/project-lecarebot.html) project.
-My research interests include cognitive robotics, reinforcement learning, and natural language processing.
+I am currently a research associate and Ph.D. student at the
+[Hamburg University of Technology](https://www.tuhh.de/), working at the
+[Institute for Data Science Foundations](https://www.dsf.tuhh.de).
+
+My research interests are in the domain of cognitive robotics, where I adopt methods of
+reinforcement learning and natural language processing.
+My work aims to investigate the link of compositionality of language and control for robotic applications,
+under the essential consideration of grounded language and embodiment.
