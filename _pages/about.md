@@ -9,7 +9,7 @@ redirect_from:
 ---
 
 
-I am currently a research associate and Ph.D. student at the
+I am currently a research associate and Ph.D. candidate at the
 [Hamburg University of Technology](https://www.tuhh.de/), working at the
 [Institute for Data Science Foundations](https://www.tuhh.de/dsf/homepage).
 
@@ -33,6 +33,6 @@ Industry Experience
 
 Teaching
 ======
-* Tutor, Introduction to Reinforcement Learning Seminar (2023)
+* Tutor, Introduction to Reinforcement Learning Seminar (2023,2024)
 * Supversior, Neural Networks Seminar, Knowledge Technology Group (2021, 2022)
 * Supversior, Bio-Inspired Artificial Intelligence Seminar, Knowledge Technology Group (2021, 2022)
