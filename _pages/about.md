@@ -33,6 +33,6 @@ Industry Experience
 
 Teaching
 ======
-* Tutor, Introduction to Reinforcement Learning Seminar (2023,2024)
+* Tutor, Introduction to Reinforcement Learning Seminar (2023, 2024)
 * Supversior, Neural Networks Seminar, Knowledge Technology Group (2021, 2022)
 * Supversior, Bio-Inspired Artificial Intelligence Seminar, Knowledge Technology Group (2021, 2022)
