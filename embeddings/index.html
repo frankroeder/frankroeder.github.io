@@ -1,53 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2D/3D Word Embeddings</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/universal-sentence-encoder"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.18.2/plotly.min.js"></script>
-    <!-- loads a local word2vec js object -->
-    <script type="text/javascript" src="./word_vectors_15k.js"></script>
-    <style>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2D/3D Word Embeddings</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/universal-sentence-encoder"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.18.2/plotly.min.js"></script>
+  <!-- loads a local word2vec js object -->
+  <script type="text/javascript" src="./word_vectors_15k.js"></script>
+  <style>
     body {
       font-family: Arial, sans-serif;
       display: flex;
       flex-direction: column;
       align-items: center;
       padding: 20px;
+      box-sizing: border-box;
+      max-width: 100%;
+      overflow-x: hidden;
     }
+
     #chart-container {
-      width: 800px;
-      height: 600px;
+      width: 100%;
+      max-width: 800px;
+      height: 60vh;
+      min-height: 300px;
     }
-    input, button {
+
+    input,
+    button {
       margin: 10px 0;
-      padding: 5px;
+      padding: 10px;
+      width: 100%;
+      max-width: 300px;
+      font-size: 16px;
     }
+
     #loading {
       font-weight: bold;
       color: #007bff;
     }
+
     .toggle-container {
       display: flex;
       align-items: center;
       margin: 10px 0;
     }
+
     .toggle-label {
       margin: 0 10px;
     }
+
     .switch {
       position: relative;
       display: inline-block;
-      width: 40px;
-      height: 20px;
+      width: 60px;
+      height: 30px;
     }
+
     .switch input {
       opacity: 0;
       width: 0;
       height: 0;
     }
+
     .slider {
       position: absolute;
       cursor: pointer;
@@ -59,41 +77,64 @@
       transition: .4s;
       border-radius: 20px;
     }
+
     .slider:before {
       position: absolute;
       content: "";
-      height: 16px;
-      width: 16px;
-      left: 2px;
-      bottom: 2px;
-      background-color: white;
-      transition: .4s;
-      border-radius: 50%;
+
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: 24px;
+        width: 24px;
+        left: 3px;
+        bottom: 3px;
+        background-color: white;
+        transition: .4s;
+        border-radius: 50%;
+      }
     }
-    input:checked + .slider {
+
+    input:checked+.slider {
       background-color: #2196F3;
     }
-    input:checked + .slider:before {
-      transform: translateX(20px);
-    }
-    </style>
-  </head>
-  <body>
-    <h1>2D/3D Word Embeddings</h1>
-    <div id="loading">Loading model...</div>
-    <div id="chart-container" style="display: none;"></div>
-    <input type="text" id="wordInput" placeholder="Enter a word" disabled>
-    <button onclick="addWord()" disabled>Add Word</button>
-    <div class="toggle-container">
-      <span class="toggle-label">2D</span>
-      <label class="switch">
-        <input type="checkbox" id="viewToggle" onchange="toggleView()">
-        <span class="slider"></span>
-      </label>
-      <span class="toggle-label">3D</span>
-    </div>
 
-    <script>
+    input:checked+.slider:before {
+      transform: translateX(30px);
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 10px;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+
+      #chart-container {
+        height: 50vh;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <h1>2D/3D Word Embeddings</h1>
+  <div id="loading">Loading model...</div>
+  <div id="chart-container" style="display: none;"></div>
+  <input type="text" id="wordInput" placeholder="Enter a word" disabled>
+  <button onclick="addWord()" disabled>Add Word</button>
+  <div class="toggle-container">
+    <span class="toggle-label">2D</span>
+    <label class="switch">
+      <input type="checkbox" id="viewToggle" onchange="toggleView()">
+      <span class="slider"></span>
+    </label>
+    <span class="toggle-label">3D</span>
+  </div>
+
+  <script>
     let model;
     let embeddings = [];
     const words = ['katze', 'hund', 'fisch', 'vogel', 'baum'];
@@ -176,10 +217,11 @@
         title: '2D Word Embeddings',
         xaxis: {title: 'X'},
         yaxis: {title: 'Y'},
-        margin: {l: 0, r: 0, b: 0, t: 40}
+        margin: {l: 30, r: 30, b: 30, t: 30},
+        autosize: true,
+        responsive: true
       };
     }
-
     function prepare3DLayout() {
       return {
         title: '3D Word Embeddings',
@@ -188,15 +230,17 @@
           yaxis: {title: 'Y'},
           zaxis: {title: 'Z'}
         },
-        margin: {l: 0, r: 0, b: 0, t: 40}
+        margin: {l: 0, r: 0, b: 0, t: 40},
+        autosize: true,
+        responsive: true
       };
     }
 
     async function addWord() {
       const newWord = document.getElementById('wordInput').value.trim().toLowerCase();
       if (!word2vec.hasOwnProperty(newWord)) {
-          alert(newWord + " is leider nicht in diesem Datensatz enthalten")
-          return;
+        alert(newWord + " ist leider nicht in diesem Datensatz enthalten")
+        return;
       }
       if (newWord && !words.includes(newWord)) {
         words.push(newWord);
@@ -211,6 +255,7 @@
     }
 
     loadModel();
-    </script>
-  </body>
+  </script>
+</body>
+
 </html>
