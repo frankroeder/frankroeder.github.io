@@ -51,6 +51,11 @@
 
     .toggle-label {
       margin: 0 10px;
+      font-weight: bold;
+    }
+
+    .active-view {
+      color: #2196F3;
     }
 
     .switch {
@@ -81,26 +86,43 @@
     .slider:before {
       position: absolute;
       content: "";
-
-      .slider:before {
-        position: absolute;
-        content: "";
-        height: 24px;
-        width: 24px;
-        left: 3px;
-        bottom: 3px;
-        background-color: white;
-        transition: .4s;
-        border-radius: 50%;
-      }
+      height: 24px;
+      width: 24px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
     }
 
-    input:checked+.slider {
+    input:checked + .slider {
       background-color: #2196F3;
     }
 
-    input:checked+.slider:before {
+    input:checked + .slider:before {
       transform: translateX(30px);
+    }
+
+    .word-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .word-item {
+      background-color: #f0f0f0;
+      padding: 5px 10px;
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+    }
+
+    .delete-word {
+      margin-left: 5px;
+      cursor: pointer;
+      color: #ff0000;
+      font-weight: bold;
     }
 
     @media (max-width: 600px) {
@@ -120,35 +142,36 @@
 </head>
 
 <body>
-  <h1>2D/3D Word Embeddings</h1>
+  <h1 id="embeddings-title">2D Word Embeddings</h1>
   <div id="loading">Loading model...</div>
   <div id="chart-container" style="display: none;"></div>
   <input type="text" id="wordInput" placeholder="Enter a word" disabled>
   <button onclick="addWord()" disabled>Add Word</button>
   <div class="toggle-container">
-    <span class="toggle-label">2D</span>
+    <span class="toggle-label" id="2d-label">2D</span>
     <label class="switch">
       <input type="checkbox" id="viewToggle" onchange="toggleView()">
       <span class="slider"></span>
     </label>
-    <span class="toggle-label">3D</span>
+    <span class="toggle-label" id="3d-label">3D</span>
   </div>
-
+  <div id="word-list" class="word-list"></div>
   <script>
     let model;
     let embeddings = [];
-    const words = ['katze', 'hund', 'fisch', 'vogel', 'baum'];
+    const words = ['gehen', 'laufen', 'rennen'];
     let is3DView = false;
 
     async function loadModel() {
-      // document.querySelector('button').disabled = false;
-      // document.getElementById('viewToggle').disabled = false;
       await updateEmbeddings();
       document.querySelector('button').disabled = false;
       document.getElementById('wordInput').disabled = false;
       document.getElementById('viewToggle').disabled = false;
       document.getElementById('loading').style.display = 'none';
       document.getElementById('chart-container').style.display = 'block';
+      updateWordList();
+      updateToggleLabels();
+      updateTitle();
     }
 
     async function getEmbeddings(words) {
@@ -159,11 +182,18 @@
     function pca(data, k) {
       const dataTransposed = tf.transpose(data);
       const [q, r] = tf.linalg.qr(dataTransposed);
-      const eigenVectors = q.slice([0, 0], [-1, k]);
+      const numDimensions = Math.min(k, q.shape[1]);
+      const eigenVectors = q.slice([0, 0], [-1, numDimensions]);
       return tf.matMul(data, eigenVectors).arraySync();
     }
 
     async function updateEmbeddings() {
+      embeddings = []; // Clear previous embeddings
+      if (words.length === 0) {
+        // If there are no words, clear the chart
+        Plotly.purge('chart-container');
+        return;
+      }
       const embeddingsTensor = await getEmbeddings(words);
       const reducedEmbeddings = pca(embeddingsTensor, 3);
       embeddings = words.map((word, i) => ({
@@ -222,6 +252,7 @@
         responsive: true
       };
     }
+
     function prepare3DLayout() {
       return {
         title: '3D Word Embeddings',
@@ -238,20 +269,58 @@
 
     async function addWord() {
       const newWord = document.getElementById('wordInput').value.trim().toLowerCase();
-      if (!word2vec.hasOwnProperty(newWord)) {
-        alert(newWord + " ist leider nicht in diesem Datensatz enthalten")
+      if (!newWord) {
+        // alert("Bitte geben Sie ein Wort ein.");
         return;
       }
-      if (newWord && !words.includes(newWord)) {
+      if (!word2vec.hasOwnProperty(newWord)) {
+        alert(newWord + " ist leider nicht in diesem Datensatz enthalten.");
+        return;
+      }
+      if (!words.includes(newWord)) {
         words.push(newWord);
         await updateEmbeddings();
         document.getElementById('wordInput').value = '';
+        updateWordList();
+        updateChart();
       }
     }
 
     function toggleView() {
       is3DView = document.getElementById('viewToggle').checked;
       updateChart();
+      updateToggleLabels();
+      updateTitle();
+    }
+
+    function updateTitle() {
+      const title = is3DView ? '3D Word Embeddings' : '2D Word Embeddings';
+      document.getElementById('embeddings-title').textContent = title;
+    }
+
+    function updateToggleLabels() {
+      document.getElementById('2d-label').classList.toggle('active-view', !is3DView);
+      document.getElementById('3d-label').classList.toggle('active-view', is3DView);
+    }
+
+    function updateWordList() {
+      const wordList = document.getElementById('word-list');
+      wordList.innerHTML = '';
+      words.forEach((word, index) => {
+        const wordItem = document.createElement('div');
+        wordItem.className = 'word-item';
+        wordItem.innerHTML = `${word} <span class="delete-word" onclick="deleteWord(${index})">×</span>`;
+        wordList.appendChild(wordItem);
+      });
+    }
+
+    async function deleteWord(index) {
+      words.splice(index, 1);
+      await updateEmbeddings();
+      updateWordList();
+      if (words.length > 0) {
+        updateChart();
+      }
     }
 
     loadModel();
