@@ -9,7 +9,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/universal-sentence-encoder"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.18.2/plotly.min.js"></script>
   <!-- loads a local word2vec js object -->
-  <script type="text/javascript" src="./word_vectors_15k.js"></script>
+  <script type="text/javascript" src="./word_vectors_15k.js" async></script>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -163,6 +163,7 @@
     let is3DView = false;
 
     async function loadModel() {
+      await waitForWord2Vec();
       await updateEmbeddings();
       document.querySelector('button').disabled = false;
       document.getElementById('wordInput').disabled = false;
@@ -172,6 +173,19 @@
       updateWordList();
       updateToggleLabels();
       updateTitle();
+    }
+
+    function waitForWord2Vec() {
+      return new Promise((resolve) => {
+        const checkWord2Vec = () => {
+          if (typeof word2vec !== 'undefined') {
+            resolve();
+          } else {
+            setTimeout(checkWord2Vec, 100);
+          }
+        };
+        checkWord2Vec();
+      });
     }
 
     async function getEmbeddings(words) {
