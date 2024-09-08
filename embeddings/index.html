@@ -6,9 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>2D/3D Word Embeddings</title>
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/universal-sentence-encoder"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.18.2/plotly.min.js"></script>
-  <!-- loads a local word2vec js object -->
   <script type="text/javascript" src="./word_vectors_15k.js" async></script>
   <style>
     body {
@@ -125,6 +123,13 @@
       font-weight: bold;
     }
 
+    .custom-message {
+      color: #ff0000;
+      font-weight: bold;
+      margin-bottom: 10px;
+      display: none;
+    }
+
     @media (max-width: 600px) {
       body {
         padding: 10px;
@@ -145,6 +150,7 @@
   <h1 id="embeddings-title">2D Word Embeddings</h1>
   <div id="loading">Loading model...</div>
   <div id="chart-container" style="display: none;"></div>
+  <div id="custom-message" class="custom-message"></div>
   <input type="text" id="wordInput" placeholder="Enter a word" disabled>
   <button onclick="addWord()" disabled>Add Word</button>
   <div class="toggle-container">
@@ -282,13 +288,23 @@
     }
 
     async function addWord() {
-      const newWord = document.getElementById('wordInput').value.trim().toLowerCase();
+      let newWord = document.getElementById('wordInput').value.trim().toLowerCase();
+      const customMessage = document.getElementById('custom-message');
+      customMessage.style.display = 'none';
+
       if (!newWord) {
-        // alert("Bitte geben Sie ein Wort ein.");
         return;
       }
+
+      // Replace German special characters
+      newWord = newWord.replace(/ß/g, 'ss')
+                       .replace(/ü/g, 'ue')
+                       .replace(/ä/g, 'ae')
+                       .replace(/ö/g, 'oe');
+
       if (!word2vec.hasOwnProperty(newWord)) {
-        alert(newWord + " ist leider nicht in diesem Datensatz enthalten.");
+        customMessage.textContent = newWord + " ist leider nicht in diesem Datensatz enthalten.";
+        customMessage.style.display = 'block';
         return;
       }
       if (!words.includes(newWord)) {
