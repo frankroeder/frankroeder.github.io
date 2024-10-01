@@ -1,66 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>2D/3D Word Embeddings</title>
+  <title>Word and Sentence Embeddings Visualizer</title>
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.18.2/plotly.min.js"></script>
-  <script type="text/javascript" src="./word_vectors_15k.js" async></script>
+  <script type="text/javascript" src="./word_vectors_top7500ger.js" async></script>
   <style>
+    :root {
+      --primary-color: #2563eb;
+      --secondary-color: #1e40af;
+      --background-color: #f8fafc;
+      --card-background: #ffffff;
+      --text-color: #1e293b;
+      --border-color: #e2e8f0;
+    }
+
     body {
-      font-family: Arial, sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 20px;
-      box-sizing: border-box;
-      max-width: 100%;
-      overflow-x: hidden;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: var(--background-color);
+      color: var(--text-color);
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--text-color);
+      margin-bottom: 1rem;
+    }
+
+    .subtitle {
+      font-size: 1.25rem;
+      color: #64748b;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    #loading {
+      text-align: center;
+      font-weight: 600;
+      color: var(--primary-color);
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      padding: 1rem;
+      background-color: #dbeafe;
+      border-radius: 0.5rem;
+    }
+
+    .card {
+      background-color: var(--card-background);
+      border-radius: 1rem;
+      box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      margin-bottom: 2rem;
+      overflow: hidden;
+    }
+
+    .card-header {
+      background-color: #f1f5f9;
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .card-body {
+      padding: 1.5rem;
     }
 
     #chart-container {
       width: 100%;
-      max-width: 800px;
-      height: 60vh;
-      min-height: 300px;
+      height: 600px;
     }
 
-    input,
-    button {
-      margin: 10px 0;
-      padding: 10px;
-      width: 100%;
-      max-width: 300px;
-      font-size: 16px;
-    }
-
-    #loading {
-      font-weight: bold;
-      color: #007bff;
+    .controls-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
     }
 
     .toggle-container {
       display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .toggle-group {
+      display: flex;
       align-items: center;
-      margin: 10px 0;
+      gap: 0.75rem;
     }
 
     .toggle-label {
-      margin: 0 10px;
-      font-weight: bold;
-    }
-
-    .active-view {
-      color: #2196F3;
+      font-weight: 500;
     }
 
     .switch {
       position: relative;
       display: inline-block;
-      width: 60px;
-      height: 30px;
+      width: 3.5rem;
+      height: 2rem;
     }
 
     .switch input {
@@ -76,109 +134,265 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background-color: #ccc;
+      background-color: #cbd5e1;
       transition: .4s;
-      border-radius: 20px;
+      border-radius: 2rem;
     }
 
     .slider:before {
       position: absolute;
       content: "";
-      height: 24px;
-      width: 24px;
-      left: 3px;
-      bottom: 3px;
+      height: 1.5rem;
+      width: 1.5rem;
+      left: 0.25rem;
+      bottom: 0.25rem;
       background-color: white;
       transition: .4s;
       border-radius: 50%;
     }
 
     input:checked + .slider {
-      background-color: #2196F3;
+      background-color: var(--primary-color);
     }
 
     input:checked + .slider:before {
-      transform: translateX(30px);
+      transform: translateX(1.5rem);
     }
 
-    .word-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 20px;
+    .input-container {
+      max-width: 600px;
+      margin: 0 auto;
     }
 
-    .word-item {
-      background-color: #f0f0f0;
-      padding: 5px 10px;
-      border-radius: 15px;
-      display: flex;
-      align-items: center;
-    }
-
-    .delete-word {
-      margin-left: 5px;
-      cursor: pointer;
-      color: #ff0000;
-      font-weight: bold;
-    }
-
-    .custom-message {
-      color: #ff0000;
-      font-weight: bold;
-      margin-bottom: 10px;
+    .input-field {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 2px solid var(--border-color);
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      transition: all 0.3s;
+      margin-bottom: 1rem;
       display: none;
     }
 
-    @media (max-width: 600px) {
-      body {
-        padding: 10px;
+    .input-field.active {
+      display: block;
+    }
+
+    .input-field:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+
+    textarea.input-field {
+      height: 100px;
+      resize: vertical;
+    }
+
+    button {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: var(--secondary-color);
+    }
+
+    button:disabled {
+      background-color: #94a3b8;
+      cursor: not-allowed;
+    }
+
+    .custom-message {
+      text-align: center;
+      color: #dc2626;
+      font-weight: 500;
+      margin-top: 1rem;
+    }
+
+    .input-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .input-item {
+      background-color: #f1f5f9;
+      padding: 0.5rem 1rem;
+      border-radius: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+    }
+
+    .delete-input {
+      cursor: pointer;
+      color: #dc2626;
+      font-weight: bold;
+      font-size: 1.25rem;
+      line-height: 1;
+      transition: all 0.3s ease;
+      padding: 0.1rem 0.3rem;
+      border-radius: 50%;
+    }
+
+    .delete-input:hover {
+      background-color: #dc2626;
+      color: white;
+      transform: scale(1.1);
+    }
+
+    .remove-info {
+      font-size: 0.9rem;
+      color: #64748b;
+      margin-top: 1rem;
+      text-align: center;
+    }
+
+    .step {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .step-number {
+      background-color: var(--primary-color);
+      color: white;
+      width: 1.5rem;
+      height: 1.5rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      margin-right: 0.75rem;
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        padding: 1rem;
       }
 
-      h1 {
-        font-size: 24px;
-      }
-
-      #chart-container {
-        height: 50vh;
+      .toggle-container {
+        flex-direction: column;
+        gap: 1rem;
       }
     }
   </style>
 </head>
-
 <body>
-  <h1 id="embeddings-title">2D Word Embeddings</h1>
-  <div id="loading">Loading model...</div>
-  <div id="chart-container" style="display: none;"></div>
-  <div id="custom-message" class="custom-message"></div>
-  <input type="text" id="wordInput" placeholder="Enter a word" disabled>
-  <button onclick="addWord()" disabled>Add Word</button>
-  <div class="toggle-container">
-    <span class="toggle-label" id="2d-label">2D</span>
-    <label class="switch">
-      <input type="checkbox" id="viewToggle" onchange="toggleView()">
-      <span class="slider"></span>
-    </label>
-    <span class="toggle-label" id="3d-label">3D</span>
+  <div class="container">
+    <header>
+      <h1>Wort- und Satzeinbettungen Visualisierer</h1>
+      <p class="subtitle">Erforschen Sie die Beziehungen zwischen den 7500 häufigsten deutschen Wörtern durch die Visualisierung von Vektoreinbettungen.</p>
+      <p class="pca-info">Die 300-dimensionalen Einbettungen werden mittels der <a href="https://de.wikipedia.org/wiki/Hauptkomponentenanalyse" target="_blank">Hauptkomponentenanalyse (PCA)</a> auf 2 bzw. 3 Dimensionen reduziert, um sie visualisieren zu können.</p>
+    </header>
+
+    <div id="loading">Modell wird geladen...</div>
+
+    <div class="card">
+      <div class="card-header">
+        <h2 class="card-title">Visualisierungsoptionen</h2>
+      </div>
+      <div class="card-body">
+        <div class="step">
+          <div class="step-number">1</div>
+          <div>Wählen Sie den Eingabetyp und die Ansichtsdimension:</div>
+        </div>
+        <div class="toggle-container">
+          <div class="toggle-group">
+            <span class="toggle-label">Wörter</span>
+            <label class="switch">
+              <input type="checkbox" id="inputTypeToggle">
+              <span class="slider"></span>
+            </label>
+            <span class="toggle-label">Sätze</span>
+          </div>
+
+          <div class="toggle-group">
+            <span class="toggle-label">2D</span>
+            <label class="switch">
+              <input type="checkbox" id="viewToggle">
+              <span class="slider"></span>
+            </label>
+            <span class="toggle-label">3D</span>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-number">2</div>
+          <div>Fügen Sie Elemente hinzu:</div>
+        </div>
+        <div class="input-container">
+          <input type="text" id="wordInput" placeholder="Geben Sie ein einzelnes Wort ein" class="input-field word-mode active">
+          <textarea id="sentenceInput" placeholder="Geben Sie einen vollständigen Satz ein" class="input-field sentence-mode"></textarea>
+          <button onclick="addInput()" disabled>Zur Visualisierung hinzufügen</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <h2 class="card-title">Visualisierung</h2>
+      </div>
+      <div class="card-body">
+        <div id="custom-message" class="custom-message"></div>
+        <div id="chart-container" style="display: none;"></div>
+        <div id="input-list" class="input-list"></div>
+      </div>
+    </div>
   </div>
-  <div id="word-list" class="word-list"></div>
+
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title">Referenzen</h2>
+    </div>
+    <div class="card-body">
+      <ul>
+        <li>Müller, A. (2015). <a href="https://devmount.github.io/GermanWordEmbeddings" target="_blank">Analyse von Wort-Vektoren deutscher Textkorpora</a>. Bachelor's Thesis, Technische Universität Berlin.</li>
+      </ul>
+    </div>
+  </div>
+
   <script>
-    let model;
     let embeddings = [];
-    const words = ['gehen', 'laufen', 'rennen'];
+    let wordInputs = ['gehen', 'laufen', 'stehen', 'sitzen'];
+    let sentenceInputs = [
+      "Ein sehr gutes Produkt",
+      "Das ist eine totale Frechheit",
+      "Super Sache!",
+      "Das beste Produkt",
+      "Die totale Enttäuschung."
+    ];
     let is3DView = false;
+    let currentMode = 'word';
 
     async function loadModel() {
       await waitForWord2Vec();
       await updateEmbeddings();
-      document.querySelector('button').disabled = false;
-      document.getElementById('wordInput').disabled = false;
-      document.getElementById('viewToggle').disabled = false;
+      enableInputs();
       document.getElementById('loading').style.display = 'none';
       document.getElementById('chart-container').style.display = 'block';
-      updateWordList();
-      updateToggleLabels();
-      updateTitle();
+      updateInputList();
+    }
+
+    function enableInputs() {
+      document.querySelector('button').disabled = false;
+      document.getElementById('wordInput').disabled = false;
+      document.getElementById('sentenceInput').disabled = false;
+      document.getElementById('viewToggle').disabled = false;
     }
 
     function waitForWord2Vec() {
@@ -194,9 +408,31 @@
       });
     }
 
-    async function getEmbeddings(words) {
-      const embeddings = words.map(word => tf.tensor(word2vec[word]));
-      return tf.stack(embeddings).arraySync()
+    function normalizeWord(word) {
+      return word.toLowerCase()
+                 .replace(/[.,!?;:]/g, '')
+                 .replace(/ß/g, 'ss')
+                 .replace(/ü/g, 'ue')
+                 .replace(/ä/g, 'ae')
+                 .replace(/ö/g, 'oe');
+    }
+
+    async function getEmbedding(input) {
+      const words = input.split(' ');
+      if (words.length === 1) {
+        const normalizedWord = normalizeWord(input);
+        return word2vec[normalizedWord] || new Array(300).fill(0);
+      } else {
+        const wordEmbeddings = words.map(word => {
+          const normalizedWord = normalizeWord(word);
+          return word2vec[normalizedWord] || new Array(300).fill(0);
+        });
+        const sumEmbedding = wordEmbeddings.reduce(
+          (acc, curr) => acc.map((val, idx) => val + curr[idx]),
+          new Array(300).fill(0)
+        );
+        return sumEmbedding.map(val => val / words.length);
+      }
     }
 
     function pca(data, k) {
@@ -208,40 +444,35 @@
     }
 
     async function updateEmbeddings() {
-      embeddings = []; // Clear previous embeddings
-      if (words.length === 0) {
-        // If there are no words, clear the chart
+      const currentInputs = currentMode === 'word' ? wordInputs : sentenceInputs;
+      if (currentInputs.length === 0) {
         Plotly.purge('chart-container');
         return;
       }
-      const embeddingsTensor = await getEmbeddings(words);
+
+      const embeddingsTensor = await Promise.all(currentInputs.map(getEmbedding));
       const reducedEmbeddings = pca(embeddingsTensor, 3);
-      embeddings = words.map((word, i) => ({
-        word,
+
+      embeddings = currentInputs.map((input, i) => ({
+        input,
         embedding: reducedEmbeddings[i]
       }));
-      updateChart();
-    }
 
-    function updateChart() {
-      const data = is3DView ? prepare3DData() : prepare2DData();
-      const layout = is3DView ? prepare3DLayout() : prepare2DLayout();
-      Plotly.newPlot('chart-container', data, layout);
+      updateChart();
     }
 
     function prepare2DData() {
       return [{
         x: embeddings.map(e => e.embedding[0]),
         y: embeddings.map(e => e.embedding[1]),
-        text: words,
+        text: embeddings.map(e => e.input),
         mode: 'markers+text',
         type: 'scatter',
+        textposition: 'top center',
         marker: {
           size: 10,
-          color: embeddings.map((_, i) => i),
-          colorscale: 'Viridis'
-        },
-        textposition: 'top center'
+          color: '#2563eb'
+        }
       }];
     }
 
@@ -250,111 +481,154 @@
         x: embeddings.map(e => e.embedding[0]),
         y: embeddings.map(e => e.embedding[1]),
         z: embeddings.map(e => e.embedding[2]),
-        text: words,
+        text: embeddings.map(e => e.input),
         mode: 'markers+text',
         type: 'scatter3d',
+        textposition: 'top center',
         marker: {
           size: 5,
-          color: embeddings.map((_, i) => i),
-          colorscale: 'Viridis'
-        },
-        textposition: 'top center'
+          color: '#2563eb'
+        }
       }];
     }
 
-    function prepare2DLayout() {
-      return {
-        title: '2D Word Embeddings',
-        xaxis: {title: 'X'},
-        yaxis: {title: 'Y'},
-        margin: {l: 30, r: 30, b: 30, t: 30},
-        autosize: true,
-        responsive: true
-      };
-    }
-
-    function prepare3DLayout() {
-      return {
-        title: '3D Word Embeddings',
+  function updateChart() {
+      const data = is3DView ? prepare3DData() : prepare2DData();
+      const layout = is3DView ? {
         scene: {
-          xaxis: {title: 'X'},
-          yaxis: {title: 'Y'},
-          zaxis: {title: 'Z'}
+          xaxis: {title: 'Dimension 1'},
+          yaxis: {title: 'Dimension 2'},
+          zaxis: {title: 'Dimension 3'}
         },
-        margin: {l: 0, r: 0, b: 0, t: 40},
-        autosize: true,
-        responsive: true
+        margin: {l: 0, r: 0, b: 0, t: 0},
+        showlegend: false,
+        height: 600
+      } : {
+        xaxis: {
+          title: 'Dimension 1',
+          zeroline: false
+        },
+        yaxis: {
+          title: 'Dimension 2',
+          zeroline: false
+        },
+        margin: {l: 40, r: 40, b: 40, t: 40},
+        showlegend: false,
+        height: 600
       };
+
+      Plotly.newPlot('chart-container', data, layout, {responsive: true});
     }
 
-    async function addWord() {
-      let newWord = document.getElementById('wordInput').value.trim().toLowerCase();
+    function updateInputMode() {
+      currentMode = document.getElementById('inputTypeToggle').checked ? 'sentence' : 'word';
+
+      const wordInput = document.getElementById('wordInput');
+      const sentenceInput = document.getElementById('sentenceInput');
+
+      if (currentMode === 'word') {
+        wordInput.classList.add('active');
+        sentenceInput.classList.remove('active');
+        wordInput.value = '';
+      } else {
+        wordInput.classList.remove('active');
+        sentenceInput.classList.add('active');
+        sentenceInput.value = '';
+      }
+
+      updatePlaceholders();
+      updateEmbeddings();
+      updateInputList();
+    }
+
+    function updatePlaceholders() {
+      const wordInput = document.getElementById('wordInput');
+      const sentenceInput = document.getElementById('sentenceInput');
+
+      if (currentMode === 'word') {
+        wordInput.placeholder = "Geben Sie ein einzelnes Wort ein (z.B. 'Haus')";
+      } else {
+        sentenceInput.placeholder = "Geben Sie einen vollständigen Satz ein (z.B. 'Das Wetter ist heute schön.')";
+      }
+    }
+
+    async function addInput() {
+      const input = currentMode === 'word'
+        ? document.getElementById('wordInput').value.trim()
+        : document.getElementById('sentenceInput').value.trim();
+
       const customMessage = document.getElementById('custom-message');
       customMessage.style.display = 'none';
 
-      if (!newWord) {
-        return;
+      if (!input) return;
+
+      if (currentMode === 'word') {
+        const normalizedWord = normalizeWord(input);
+        if (!word2vec.hasOwnProperty(normalizedWord)) {
+          customMessage.textContent = `"${input}" ist leider nicht in diesem Datensatz enthalten.`;
+          customMessage.style.display = 'block';
+          return;
+        }
+        if (!wordInputs.includes(input)) {
+          wordInputs.push(input);
+        }
+      } else {
+        if (!sentenceInputs.includes(input)) {
+          sentenceInputs.push(input);
+        }
       }
 
-      // Replace German special characters
-      newWord = newWord.replace(/ß/g, 'ss')
-                       .replace(/ü/g, 'ue')
-                       .replace(/ä/g, 'ae')
-                       .replace(/ö/g, 'oe');
-
-      if (!word2vec.hasOwnProperty(newWord)) {
-        customMessage.textContent = newWord + " ist leider nicht in diesem Datensatz enthalten.";
-        customMessage.style.display = 'block';
-        return;
-      }
-      if (!words.includes(newWord)) {
-        words.push(newWord);
-        await updateEmbeddings();
-        document.getElementById('wordInput').value = '';
-        updateWordList();
-        updateChart();
-      }
+      await updateEmbeddings();
+      document.getElementById('wordInput').value = '';
+      document.getElementById('sentenceInput').value = '';
+      updateInputList();
     }
 
     function toggleView() {
       is3DView = document.getElementById('viewToggle').checked;
       updateChart();
-      updateToggleLabels();
-      updateTitle();
     }
 
-    function updateTitle() {
-      const title = is3DView ? '3D Word Embeddings' : '2D Word Embeddings';
-      document.getElementById('embeddings-title').textContent = title;
-    }
+    function updateInputList() {
+      const inputList = document.getElementById('input-list');
+      inputList.innerHTML = '';
+      const currentInputs = currentMode === 'word' ? wordInputs : sentenceInputs;
 
-    function updateToggleLabels() {
-      document.getElementById('2d-label').classList.toggle('active-view', !is3DView);
-      document.getElementById('3d-label').classList.toggle('active-view', is3DView);
-    }
-
-    function updateWordList() {
-      const wordList = document.getElementById('word-list');
-      wordList.innerHTML = '';
-      words.forEach((word, index) => {
-        const wordItem = document.createElement('div');
-        wordItem.className = 'word-item';
-        wordItem.innerHTML = `${word} <span class="delete-word" onclick="deleteWord(${index})">×</span>`;
-        wordList.appendChild(wordItem);
+      currentInputs.forEach((input, index) => {
+        const inputItem = document.createElement('div');
+        inputItem.className = 'input-item';
+        inputItem.innerHTML = `
+          ${input}
+          <span class="delete-input" onclick="deleteInput(${index})" title="Entfernen">×</span>
+        `;
+        inputList.appendChild(inputItem);
       });
+
+      const removeInfo = document.createElement('p');
+      removeInfo.className = 'remove-info';
+      removeInfo.textContent = 'Hinweis: Sie können hinzugefügte Elemente jederzeit aus der Visualisierung entfernen, indem Sie auf das rote "×" neben dem Element klicken.';
+      inputList.appendChild(removeInfo);
     }
 
-    async function deleteWord(index) {
-      words.splice(index, 1);
-      await updateEmbeddings();
-      updateWordList();
-      if (words.length > 0) {
-        updateChart();
+    async function deleteInput(index) {
+      if (currentMode === 'word') {
+        wordInputs.splice(index, 1);
+      } else {
+        sentenceInputs.splice(index, 1);
       }
+      await updateEmbeddings();
+      updateInputList();
     }
 
-    loadModel();
-  </script>
-</body>
+    // Event Listeners
+    document.getElementById('inputTypeToggle').addEventListener('change', updateInputMode);
+    document.getElementById('viewToggle').addEventListener('change', toggleView);
 
+    // Initialize
+    document.addEventListener('DOMContentLoaded', function() {
+      updatePlaceholders();
+      loadModel();
+    });
+</script>
+</body>
 </html>
