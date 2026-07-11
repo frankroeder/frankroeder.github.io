@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Word and Sentence Embeddings Visualizer</title>
-  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+  <meta name="description" content="Interactive visualizer for 300,000 German word and sentence embeddings using PCA-reduced 2D/3D views.">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.18.2/plotly.min.js"></script>
   <script type="text/javascript" src="./top300k_ger_pca.js" async></script>
   <style>
@@ -297,7 +297,7 @@
     <header>
       <h1>Wort- und Satzeinbettungen Visualisierer</h1>
       <p class="subtitle">Erforschen Sie die Beziehungen zwischen den 300.000 häufigsten deutschen Wörtern durch die Visualisierung von Vektoreinbettungen.</p>
-      <p class="pca-info">Die 300-dimensionalen Einbettungen wurden mittels der <a href="https://de.wikipedia.org/wiki/Hauptkomponentenanalyse" target="_blank">Hauptkomponentenanalyse (PCA)</a> auf 2 bzw. 3 Dimensionen reduziert, um sie visualisieren zu können.</p>
+      <p class="pca-info">Die 300-dimensionalen Einbettungen wurden mittels der <a href="https://de.wikipedia.org/wiki/Hauptkomponentenanalyse" target="_blank" rel="noopener">Hauptkomponentenanalyse (PCA)</a> auf 2 bzw. 3 Dimensionen reduziert, um sie visualisieren zu können.</p>
     </header>
 
     <div id="loading">Modell wird geladen...</div>
@@ -353,16 +353,16 @@
         <div id="input-list" class="input-list"></div>
       </div>
     </div>
-  </div>
 
-  <div class="card">
-    <div class="card-header">
-      <h2 class="card-title">Referenzen</h2>
-    </div>
-    <div class="card-body">
-      <ul>
-        <li>Müller, A. (2015). <a href="https://devmount.github.io/GermanWordEmbeddings" target="_blank">Analyse von Wort-Vektoren deutscher Textkorpora</a>. Bachelor's Thesis, Technische Universität Berlin.</li>
-      </ul>
+    <div class="card">
+      <div class="card-header">
+        <h2 class="card-title">Referenzen</h2>
+      </div>
+      <div class="card-body">
+        <ul>
+          <li>Müller, A. (2015). <a href="https://devmount.github.io/GermanWordEmbeddings" target="_blank" rel="noopener">Analyse von Wort-Vektoren deutscher Textkorpora</a>. Bachelor's Thesis, Technische Universität Berlin.</li>
+        </ul>
+      </div>
     </div>
   </div>
 
@@ -484,7 +484,7 @@
       }];
     }
 
-  function updateChart() {
+    function updateChart() {
       const data = is3DView ? prepare3DData() : prepare2DData();
       const layout = is3DView ? {
         scene: {
