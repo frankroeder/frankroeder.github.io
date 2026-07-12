@@ -1,69 +1,12 @@
-/* Lato font imports */
-@font-face {
-  font-family: 'Lato';
-  font-style: italic;
-  font-weight: 400;
-  src: local('Lato Italic'), local('Lato-Italic'), url(https://fonts.gstatic.com/s/lato/v15/S6u8w4BMUTPHjxsAUi-qNiXg7eU0.woff2) format('woff2');
-  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+/* Nous Research inspired theme: white page, steel-blue monochrome, typewriter mono body, serif nav, dashed dividers */
+:root {
+  --blue: #234d76;
+  --blue-muted: rgba(35, 77, 118, 0.82);
+  --blue-soft: rgba(35, 77, 118, 0.5);
+  --mono: "Courier New", Courier, "Nimbus Mono PS", monospace;
+  --serif: "Times New Roman", Times, Georgia, serif;
 }
 
-@font-face {
-  font-family: 'Lato';
-  font-style: italic;
-  font-weight: 400;
-  src: local('Lato Italic'), local('Lato-Italic'), url(https://fonts.gstatic.com/s/lato/v15/S6u8w4BMUTPHjxsAXC-qNiXg7Q.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-@font-face {
-  font-family: 'Lato';
-  font-style: italic;
-  font-weight: 700;
-  src: local('Lato Bold Italic'), local('Lato-BoldItalic'), url(https://fonts.gstatic.com/s/lato/v15/S6u_w4BMUTPHjxsI5wq_FQftx9897sxZ.woff2) format('woff2');
-  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-
-@font-face {
-  font-family: 'Lato';
-  font-style: italic;
-  font-weight: 700;
-  src: local('Lato Bold Italic'), local('Lato-BoldItalic'), url(https://fonts.gstatic.com/s/lato/v15/S6u_w4BMUTPHjxsI5wq_Gwftx9897g.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-@font-face {
-  font-family: 'Lato';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Lato Regular'), local('Lato-Regular'), url(https://fonts.gstatic.com/s/lato/v15/S6uyw4BMUTPHjxAwXiWtFCfQ7A.woff2) format('woff2');
-  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-
-@font-face {
-  font-family: 'Lato';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Lato Regular'), local('Lato-Regular'), url(https://fonts.gstatic.com/s/lato/v15/S6uyw4BMUTPHjx4wXiWtFCc.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-@font-face {
-  font-family: 'Lato';
-  font-style: normal;
-  font-weight: 700;
-  src: local('Lato Bold'), local('Lato-Bold'), url(https://fonts.gstatic.com/s/lato/v15/S6u9w4BMUTPHh6UVSwaPGQ3q5d0N7w.woff2) format('woff2');
-  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-
-@font-face {
-  font-family: 'Lato';
-  font-style: normal;
-  font-weight: 700;
-  src: local('Lato Bold'), local('Lato-Bold'), url(https://fonts.gstatic.com/s/lato/v15/S6u9w4BMUTPHh6UVSwiPGQ3q5d0.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-/* Base styles */
 * {
   box-sizing: border-box;
 }
@@ -73,64 +16,113 @@ body {
   padding: 0;
   overflow-x: hidden;
   width: 100%;
-  font-family: 'Lato', Verdana, Helvetica, sans-serif;
-  font-size: 14px;
-  background-color: white;
-  color: black;
+  font-family: var(--mono);
+  font-size: 15px;
+  line-height: 1.7;
+  background-color: #ffffff;
+  color: var(--blue);
 }
 
 a {
-  color: #1772d0;
-  text-decoration: none;
-  font-family: 'Lato', Verdana, Helvetica, sans-serif;
-  font-size: 14px;
+  color: var(--blue);
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 a:focus,
 a:hover {
-  color: #f09228;
+  text-decoration-style: dashed;
+}
+
+a:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
+}
+
+/* Top bar: contact left, links right */
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px 20px;
+  flex-wrap: wrap;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 20px 16px 14px;
+  border-bottom: 1px dashed var(--blue);
+}
+
+.site-contact {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--blue-muted);
+}
+
+.site-header nav {
+  display: flex;
+  gap: 26px;
+  flex-wrap: wrap;
+  font-family: var(--serif);
+  font-size: 16px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.site-header a {
   text-decoration: none;
 }
 
-strong {
-  font-family: 'Lato', Verdana, Helvetica, sans-serif;
-  font-size: 14px;
-}
-
-h1 {
-  font-family: 'Lato', Verdana, Helvetica, sans-serif;
-  font-size: 32px;
-  font-weight: bold;
-  margin: 0 0 0.6em 0;
-  text-align: left;
-}
-
-h2 {
-  font-family: 'Lato', Verdana, Helvetica, sans-serif;
-  font-size: 22px;
-  font-weight: bold;
-  margin: 1.2em 0 0.45em;
-  padding: 0;
-}
-
-.papertitle {
-  font-family: 'Lato', Verdana, Helvetica, sans-serif;
-  font-size: 14px;
-  font-weight: 700;
+.site-header a:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
 
 .container {
-  max-width: 800px;
+  max-width: 860px;
   margin: 0 auto;
-  padding: 10px 16px;
+  padding: 30px 16px 10px;
+}
+
+.kicker {
+  display: block;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--blue-muted);
+  margin-bottom: 12px;
+}
+
+h1 {
+  font-family: var(--serif);
+  font-size: clamp(28px, 6vw, 42px);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  margin: 0 0 0.5em 0;
+}
+
+section {
+  border-top: 1px dashed var(--blue);
+  margin-top: 30px;
+  padding-top: 22px;
+}
+
+h2 {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  margin: 0 0 1em;
 }
 
 /* Intro: bio + photo side by side */
 .intro {
   display: flex;
-  gap: 16px;
+  gap: 32px;
   align-items: flex-start;
-  margin-bottom: 4px;
 }
 
 .bio {
@@ -139,17 +131,12 @@ h2 {
 }
 
 .bio p {
-  margin: 0 0 0.7em;
-}
-
-.bio .links {
-  text-align: center;
-  margin-top: 0.4em;
+  margin: 0 0 0.9em;
 }
 
 .photo-link {
-  flex: 0 0 34%;
-  max-width: 34%;
+  flex: 0 0 28%;
+  max-width: 28%;
 }
 
 .photo-link img {
@@ -158,16 +145,28 @@ h2 {
   display: block;
 }
 
+/* Blue duotone images, original on hover */
+.photo-link img,
+.pub-gif {
+  filter: grayscale(1) sepia(0.4) hue-rotate(165deg) saturate(3) brightness(1.05);
+  transition: filter 0.25s ease-in-out;
+}
+
+.photo-link img:hover,
+.pub-gif:hover {
+  filter: none;
+}
+
 /* Publications */
 .publication {
   display: flex;
-  gap: 15px;
-  margin-bottom: 18px;
+  gap: 24px;
+  margin-bottom: 28px;
   align-items: flex-start;
 }
 
 .pub-gif-wrap {
-  width: 190px;
+  width: 180px;
   flex-shrink: 0;
   display: flex;
   align-items: center;
@@ -177,7 +176,7 @@ h2 {
 
 .pub-gif {
   max-width: 100%;
-  max-height: 270px;
+  max-height: 260px;
   height: auto;
   width: auto;
   display: block;
@@ -189,17 +188,69 @@ h2 {
 }
 
 .pub-text p {
-  margin: 10px 0 0;
+  margin: 8px 0 0;
+}
+
+.papertitle {
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.pub-authors,
+.pub-venue {
+  font-size: 13.5px;
+  color: var(--blue-muted);
+}
+
+.pub-venue {
+  font-style: italic;
+}
+
+.pub-links {
+  font-size: 13.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.pub-links a {
+  margin-right: 14px;
+}
+
+.pub-abstract {
   font-size: 14px;
-  line-height: 1.5;
+  line-height: 1.65;
+}
+
+.pub-committee {
+  font-size: 13.5px;
+  color: var(--blue-muted);
+}
+
+/* Compact publication card: tighter column, smaller media, denser text */
+.publication.compact {
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.publication.compact .pub-gif-wrap {
+  width: 150px;
+}
+
+.publication.compact .pub-text p {
+  margin-top: 5px;
+}
+
+.publication.compact .pub-abstract {
+  font-size: 13.5px;
+  line-height: 1.55;
 }
 
 .spotlight {
-  color: #e67e00;
   font-weight: bold;
+  font-style: normal;
 }
 
-/* List styling */
+/* Lists */
 ul {
   list-style: none;
   margin: 0 0 4px;
@@ -207,35 +258,62 @@ ul {
 }
 
 li {
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   position: relative;
-  padding-left: 15px;
+  padding-left: 22px;
 }
 
 li::before {
-  content: "•";
+  content: "+";
   position: absolute;
   left: 0;
-  color: #1772d0;
+  color: var(--blue-soft);
 }
 
-/* Image hover */
-.hoverZoomLink {
-  transition: transform 0.2s ease-in-out;
+/* Dated lists: mono date column, no bullet. Wrapped lines are indented to
+   align with the description text (hanging indent under the date column). */
+.news { --col: 5rem; }
+.teaching { --col: 6rem; }
+.timeline { --col: 9.4rem; }
+
+.news li,
+.teaching li,
+.timeline li {
+  position: relative;
+  padding-left: var(--col);
 }
 
-.hoverZoomLink:hover {
-  transform: scale(1.04);
+.news li::before,
+.teaching li::before,
+.timeline li::before {
+  content: none;
+}
+
+.date,
+.term {
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--blue);
+  white-space: nowrap;
 }
 
 /* Footer */
 footer {
-  text-align: center;
-  padding: 18px 0 10px;
-  font-size: 0.9em;
-  color: #666;
-  border-top: 1px solid #eee;
-  margin-top: 24px;
+  max-width: 860px;
+  margin: 40px auto 0;
+  padding: 16px;
+  border-top: 1px dashed var(--blue);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
 img {
@@ -244,20 +322,41 @@ img {
   display: block;
 }
 
-/* Mobile: fight the old table rules by using modern layout */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
 @media (max-width: 640px) {
+  body {
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
   .container {
-    padding: 6px 8px;
+    padding: 20px 14px 6px;
+  }
+
+  .site-header {
+    padding: 14px 14px 10px;
+  }
+
+  .site-header nav {
+    gap: 18px;
+    font-size: 15px;
   }
 
   .intro {
     flex-direction: column;
+    gap: 8px;
   }
 
   .photo-link {
     flex: none;
-    max-width: 220px;
-    margin: 8px auto 4px;
+    max-width: 200px;
+    margin: 4px auto 14px;
     order: 1;
   }
 
@@ -265,17 +364,14 @@ img {
     order: 2;
   }
 
-  h1 {
-    font-size: 26px;
-  }
-
-  h2 {
-    font-size: 18px;
+  .publication {
+    flex-direction: column;
+    gap: 12px;
   }
 
   .pub-gif-wrap {
     width: 100%;
-    max-width: 280px;
+    max-width: 260px;
     margin: 0 auto;
   }
 
@@ -284,8 +380,19 @@ img {
     max-height: none;
   }
 
-  .publication {
-    flex-direction: column;
+  /* Collapse date columns: date on its own line above the entry */
+  .news li,
+  .teaching li,
+  .timeline li {
+    padding-left: 0;
+  }
+
+  .date,
+  .term {
+    position: static;
+    display: block;
+    width: auto;
+    white-space: normal;
   }
 
   p,
@@ -296,26 +403,18 @@ img {
   }
 }
 
-@media (max-width: 420px) {
-  h1 {
-    font-size: 22px;
-  }
-
-  .pub-gif-wrap {
-    max-width: 240px;
-  }
-
-  .pub-gif {
-    max-width: 100%;
-  }
-
-  .bio p {
-    font-size: 13px;
-  }
-}
-
 /* Print styles for CV-like output */
 @media print {
+  body {
+    background: white;
+    color: black;
+    font-size: 12px;
+  }
+
+  .site-header {
+    display: none;
+  }
+
   .container {
     max-width: 100%;
     padding: 0;
@@ -333,6 +432,7 @@ img {
 
   .photo-link img {
     max-width: 110px;
+    filter: none;
   }
 
   h1 {
@@ -340,8 +440,14 @@ img {
     margin-bottom: 0.3em;
   }
 
+  section {
+    border-top: none;
+    margin-top: 0;
+    padding-top: 0;
+  }
+
   h2 {
-    font-size: 15px;
+    font-size: 13px;
     margin: 1em 0 0.3em;
     border-bottom: 1px solid #333;
     padding-bottom: 2px;
@@ -362,11 +468,17 @@ img {
   .pub-gif {
     max-width: 100%;
     height: auto;
+    filter: none;
   }
 
   a {
     color: #000 !important;
     text-decoration: underline;
+  }
+
+  .date,
+  .term {
+    color: #333;
   }
 
   ul {
@@ -379,9 +491,5 @@ img {
 
   footer {
     display: none;
-  }
-
-  .bio p {
-    font-size: 12px;
   }
 }
