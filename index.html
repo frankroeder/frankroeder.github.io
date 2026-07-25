@@ -5,19 +5,69 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Frank Röder is a postdoctoral researcher at TUHH Institute for Data Science Foundations. Research on sequential decision-making, world modeling, causality, reinforcement learning, and embodied intelligence.">
   <title>Frank Röder – Dr. rer. nat., Postdoctoral Researcher</title>
+  <link rel="canonical" href="https://frankroeder.github.io/">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0f1720" media="(prefers-color-scheme: dark)">
+
+  <meta property="og:type" content="profile">
+  <meta property="og:site_name" content="Frank Röder">
+  <meta property="og:title" content="Frank Röder – Dr. rer. nat., Postdoctoral Researcher">
+  <meta property="og:description" content="Postdoctoral researcher at TUHH working on sequential decision-making, world modeling, causality, and embodied intelligence.">
+  <meta property="og:url" content="https://frankroeder.github.io/">
+  <meta property="og:image" content="https://frankroeder.github.io/assets/profile.jpg">
+  <meta property="og:image:alt" content="Portrait of Frank Röder">
+  <meta name="twitter:card" content="summary">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Frank Röder",
+    "honorificPrefix": "Dr. rer. nat.",
+    "jobTitle": "Postdoctoral Researcher",
+    "url": "https://frankroeder.github.io/",
+    "image": "https://frankroeder.github.io/assets/profile.jpg",
+    "email": "mailto:frank.roeder@tuhh.de",
+    "affiliation": {
+      "@type": "Organization",
+      "name": "Institute for Data Science Foundations, Hamburg University of Technology",
+      "url": "https://www.tuhh.de/dsf/homepage"
+    },
+    "alumniOf": {
+      "@type": "CollegeOrUniversity",
+      "name": "Hamburg University of Technology"
+    },
+    "knowsAbout": [
+      "Reinforcement Learning",
+      "World Models",
+      "Sequential Decision-Making",
+      "Causality",
+      "Embodied Intelligence",
+      "Robotics"
+    ],
+    "sameAs": [
+      "https://scholar.google.de/citations?hl=en&user=wIaGIpoAAAAJ",
+      "https://github.com/frankroeder",
+      "https://orcid.org/0009-0008-9524-752X"
+    ]
+  }
+  </script>
+
   <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
     <span class="site-contact">frank.roeder [at] tuhh.de</span>
-    <nav>
-      <a target="_blank" rel="noopener" href="https://scholar.google.de/citations?hl=en&amp;user=wIaGIpoAAAAJ">Scholar</a>
-      <a target="_blank" rel="noopener" href="https://github.com/frankroeder">GitHub</a>
-      <a target="_blank" rel="noopener" href="https://orcid.org/0009-0008-9524-752X">ORCID</a>
+    <nav aria-label="Profiles">
+      <a target="_blank" rel="me noopener" href="https://scholar.google.de/citations?hl=en&amp;user=wIaGIpoAAAAJ">Scholar</a>
+      <a target="_blank" rel="me noopener" href="https://github.com/frankroeder">GitHub</a>
+      <a target="_blank" rel="me noopener" href="https://orcid.org/0009-0008-9524-752X">ORCID</a>
     </nav>
   </header>
-  <div class="container">
+  <main class="container" id="main">
     <div class="intro">
       <div class="bio">
         <span class="kicker">Postdoctoral Researcher - Reinforcement Learning & Robotics</span>
@@ -41,7 +91,7 @@
         </p>
       </div>
       <a href="assets/profile.jpg" class="photo-link">
-        <img src="assets/profile.jpg" alt="Frank Röder">
+        <img src="assets/profile.webp" width="512" height="512" alt="Frank Röder">
       </a>
     </div>
 
@@ -49,18 +99,23 @@
       <h2>Selected Publications</h2>
       <div class="publication">
         <div class="pub-gif-wrap">
-          <img src="assets/ball_walker.gif" alt="" class="pub-gif" loading="lazy">
+          <video class="pub-gif" width="128" height="192" autoplay muted loop playsinline
+                 aria-label="Simulated walker agents traversing varied terrain across several environment contexts">
+            <source src="assets/ball_walker.mp4" type="video/mp4">
+          </video>
         </div>
         <div class="pub-text">
-          <a href="https://openreview.net/forum?id=41bIzD5sit" class="papertitle">
-            Dynamics-Aligned Latent Imagination in Contextual World Models for Zero-Shot Generalization
-          </a>
+          <h3 class="papertitle">
+            <a target="_blank" rel="noopener" href="https://openreview.net/forum?id=41bIzD5sit">
+              Dynamics-Aligned Latent Imagination in Contextual World Models for Zero-Shot Generalization
+            </a>
+          </h3>
           <p class="pub-authors"><strong>Frank Röder</strong>, Jan Benad, Manfred Eppe, Pradeep Kr. Banerjee</p>
           <p class="pub-venue">Conference on Neural Information Processing Systems (NeurIPS) 2025</p>
           <p class="pub-links">
-            <a href="https://openreview.net/forum?id=41bIzD5sit">OpenReview</a>
-            <a href="https://arxiv.org/abs/2508.20294">ArXiv</a>
-            <a href="https://github.com/frankroeder/dali">Code</a>
+            <a target="_blank" rel="noopener" href="https://openreview.net/forum?id=41bIzD5sit">OpenReview</a>
+            <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2508.20294">ArXiv</a>
+            <a target="_blank" rel="noopener" href="https://github.com/frankroeder/dali">Code</a>
           </p>
           <p class="pub-abstract">
             We show that dynamics-aligned representations improve zero-shot
@@ -74,12 +129,17 @@
 
       <div class="publication">
         <div class="pub-gif-wrap">
-          <img src="assets/metaworld10.gif" alt="" class="pub-gif" loading="lazy">
+          <video class="pub-gif" width="360" height="374" autoplay muted loop playsinline
+                 aria-label="Robot arm performing four Meta-World tasks: button press, door open, pick place, and push">
+            <source src="assets/metaworld10.mp4" type="video/mp4">
+          </video>
         </div>
         <div class="pub-text">
-          <a href="https://openreview.net/forum?id=1de3azE606" class="papertitle">
-            Meta-World+: An Improved, Standardized, RL Benchmark
-          </a>
+          <h3 class="papertitle">
+            <a target="_blank" rel="noopener" href="https://openreview.net/forum?id=1de3azE606">
+              Meta-World+: An Improved, Standardized, RL Benchmark
+            </a>
+          </h3>
           <p class="pub-authors">
             Reginald McLean, Evangelos Chatzaroulas, Luc McCutcheon,
             <strong>Frank Röder</strong>, Tianhe Yu, Zhanpeng He,
@@ -92,9 +152,9 @@
             2025 Workshop Track CODEML <span class="spotlight">(Spotlight)</span>
           </p>
           <p class="pub-links">
-            <a href="https://openreview.net/forum?id=1de3azE606">OpenReview</a>
-            <a href="https://arxiv.org/abs/2505.11289">ArXiv</a>
-            <a href="https://github.com/Farama-Foundation/Metaworld">Code</a>
+            <a target="_blank" rel="noopener" href="https://openreview.net/forum?id=1de3azE606">OpenReview</a>
+            <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2505.11289">ArXiv</a>
+            <a target="_blank" rel="noopener" href="https://github.com/Farama-Foundation/Metaworld">Code</a>
           </p>
           <p class="pub-abstract">
             An improved and standardized reinforcement learning benchmark
@@ -109,19 +169,24 @@
       <h2>Dissertation</h2>
       <div class="publication compact">
         <div class="pub-gif-wrap">
-          <img src="assets/wrong_object.gif" alt="Robot arm told to shift the blue object but pushing the red cube" class="pub-gif" loading="lazy">
+          <video class="pub-gif" width="460" height="374" autoplay muted loop playsinline
+                 aria-label="Robot arm told to shift the blue object but pushing the red cube">
+            <source src="assets/wrong_object.mp4" type="video/mp4">
+          </video>
         </div>
         <div class="pub-text">
-          <a href="https://doi.org/10.15480/882.17098" class="papertitle">
-            Language Grounding in Deep Reinforcement Learning for Dynamic Goal-Oriented Robotics
-          </a>
+          <h3 class="papertitle">
+            <a target="_blank" rel="noopener" href="https://doi.org/10.15480/882.17098">
+              Language Grounding in Deep Reinforcement Learning for Dynamic Goal-Oriented Robotics
+            </a>
+          </h3>
           <p class="pub-authors"><strong>Frank Röder</strong></p>
           <p class="pub-venue">Doctoral Thesis, Hamburg University of Technology (TUHH), 2026</p>
           <p class="pub-committee">Reviewers: Prof. Dr. rer. nat. Nihat Ay, Prof. Dr. Pierre-Alexandre Murena</p>
           <p class="pub-links">
-            <a href="https://doi.org/10.15480/882.17098">DOI</a>
-            <a href="https://github.com/frankroeder/language-conditioned-rl">RL Algorithms</a>
-            <a href="https://github.com/frankroeder/lanro-gym">Robotics Simulation</a>
+            <a target="_blank" rel="noopener" href="https://doi.org/10.15480/882.17098">DOI</a>
+            <a target="_blank" rel="noopener" href="https://github.com/frankroeder/language-conditioned-rl">RL Algorithms</a>
+            <a target="_blank" rel="noopener" href="https://github.com/frankroeder/lanro-gym">Robotics Simulation</a>
           </p>
           <p class="pub-abstract">
             Language is the primary medium for instructing embodied agents, yet
@@ -141,13 +206,22 @@
     </section>
 
     <section>
+      <h2>Full Publication List</h2>
+      <p>
+        A complete and up-to-date list is available on
+        <a target="_blank" rel="me noopener" href="https://scholar.google.de/citations?hl=en&amp;user=wIaGIpoAAAAJ">Google Scholar</a>
+        and <a target="_blank" rel="me noopener" href="https://orcid.org/0009-0008-9524-752X">ORCID</a>.
+      </p>
+    </section>
+
+    <section>
       <h2>Activities &amp; News</h2>
       <ul class="news">
-        <li><span class="date">Feb 2026</span> Defended my PhD (Dr. rer. nat.) on 10.02.2026.</li>
-        <li><span class="date">Dec 2025</span> Attended NeurIPS 2025 in San Diego, CA, with two accepted papers.</li>
-        <li><span class="date">Sep 2025</span> Attended the <a href="https://www.tuhh.de/dsf/mml">Conference on Mathematics of Machine Learning 2025</a> at our institute in Hamburg.</li>
-        <li><span class="date">Feb 2025</span> Attended the <a href="https://www.guided-self.org/gso-2025.html">Guided Self-Organization Conference (GSO-2025)</a> in Tübingen.</li>
-        <li><span class="date">Feb 2025</span> Submitted my PhD dissertation.</li>
+        <li><time class="date" datetime="2026-02">Feb 2026</time> Defended my PhD (Dr. rer. nat.) on 10.02.2026.</li>
+        <li><time class="date" datetime="2025-12">Dec 2025</time> Attended NeurIPS 2025 in San Diego, CA, with two accepted papers.</li>
+        <li><time class="date" datetime="2025-09">Sep 2025</time> Attended the <a target="_blank" rel="noopener" href="https://www.tuhh.de/dsf/mml">Conference on Mathematics of Machine Learning 2025</a> at our institute in Hamburg.</li>
+        <li><time class="date" datetime="2025-02">Feb 2025</time> Attended the <a target="_blank" rel="noopener" href="https://www.guided-self.org/gso-2025.html">Guided Self-Organization Conference (GSO-2025)</a> in Tübingen.</li>
+        <li><time class="date" datetime="2025-02">Feb 2025</time> Submitted my PhD dissertation.</li>
       </ul>
     </section>
 
@@ -274,11 +348,22 @@
         </li>
       </ul>
     </section>
-  </div>
+  </main>
 
   <footer>
-    <span>&copy; 2026 Frank Röder. All rights reserved.</span>
+    <span>&copy; <span id="year">2026</span> Frank Röder. All rights reserved.</span>
     <span>/\-\_=+|&lt;</span>
   </footer>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // CSS cannot stop a <video>, so honour prefers-reduced-motion here.
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      for (const video of document.querySelectorAll('video')) {
+        video.removeAttribute('autoplay');
+        video.pause();
+      }
+    }
+  </script>
 </body>
 </html>

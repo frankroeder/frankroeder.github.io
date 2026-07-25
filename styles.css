@@ -1,10 +1,22 @@
 /* Nous Research inspired theme: white page, steel-blue monochrome, typewriter mono body, serif nav, dashed dividers */
 :root {
+  --page: #ffffff;
   --blue: #234d76;
   --blue-muted: rgba(35, 77, 118, 0.82);
   --blue-soft: rgba(35, 77, 118, 0.5);
+  --duotone: grayscale(1) sepia(0.4) hue-rotate(165deg) saturate(3) brightness(1.05);
   --mono: "Courier New", Courier, "Nimbus Mono PS", monospace;
   --serif: "Times New Roman", Times, Georgia, serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --page: #0f1720;
+    --blue: #bcd3e8;
+    --blue-muted: rgba(188, 211, 232, 0.78);
+    --blue-soft: rgba(188, 211, 232, 0.45);
+    --duotone: grayscale(1) sepia(0.4) hue-rotate(165deg) saturate(2.4) brightness(0.85);
+  }
 }
 
 * {
@@ -19,8 +31,23 @@ body {
   font-family: var(--mono);
   font-size: 15px;
   line-height: 1.7;
-  background-color: #ffffff;
+  background-color: var(--page);
   color: var(--blue);
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--page);
+  color: var(--blue);
+  padding: 10px 16px;
+  border: 1px dashed var(--blue);
+  z-index: 10;
+}
+
+.skip-link:focus {
+  left: 0;
 }
 
 a {
@@ -145,16 +172,24 @@ h2 {
   display: block;
 }
 
-/* Blue duotone images, original on hover */
+/* Blue duotone media, original on hover */
 .photo-link img,
 .pub-gif {
-  filter: grayscale(1) sepia(0.4) hue-rotate(165deg) saturate(3) brightness(1.05);
+  filter: var(--duotone);
   transition: filter 0.25s ease-in-out;
 }
 
 .photo-link img:hover,
 .pub-gif:hover {
   filter: none;
+}
+
+/* Touch devices never get the hover, so show the media unfiltered there */
+@media (hover: none) {
+  .photo-link img,
+  .pub-gif {
+    filter: none;
+  }
 }
 
 /* Publications */
@@ -192,8 +227,10 @@ h2 {
 }
 
 .papertitle {
+  font-size: inherit;
   font-weight: 700;
   line-height: 1.45;
+  margin: 0;
 }
 
 .pub-authors,
@@ -316,7 +353,8 @@ footer {
   flex-wrap: wrap;
 }
 
-img {
+img,
+video {
   max-width: 100%;
   height: auto;
   display: block;
@@ -405,13 +443,22 @@ img {
 
 /* Print styles for CV-like output */
 @media print {
+  /* Paper is always white, so undo the dark palette if it is active */
+  :root {
+    --page: #ffffff;
+    --blue: #000000;
+    --blue-muted: #333333;
+    --blue-soft: #666666;
+  }
+
   body {
     background: white;
     color: black;
     font-size: 12px;
   }
 
-  .site-header {
+  .site-header,
+  .skip-link {
     display: none;
   }
 
@@ -459,21 +506,21 @@ img {
     margin-bottom: 10px;
   }
 
+  /* Videos do not render reliably in print; drop them from the CV output. */
   .pub-gif-wrap {
-    float: left;
-    width: 70px;
-    margin-right: 8px;
-  }
-
-  .pub-gif {
-    max-width: 100%;
-    height: auto;
-    filter: none;
+    display: none;
   }
 
   a {
     color: #000 !important;
     text-decoration: underline;
+  }
+
+  /* Spell out link targets, since a printed page cannot be clicked */
+  .pub-links a::after {
+    content: " (" attr(href) ")";
+    font-size: 10px;
+    word-break: break-all;
   }
 
   .date,
