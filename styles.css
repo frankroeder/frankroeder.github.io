@@ -96,13 +96,18 @@ a:focus-visible {
   text-transform: uppercase;
 }
 
-.site-header a {
+.site-header nav a {
   text-decoration: none;
 }
 
-.site-header a:hover {
+.site-header nav a:hover {
   text-decoration: underline;
   text-underline-offset: 4px;
+}
+
+a.site-contact {
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .container {
@@ -136,12 +141,12 @@ section {
 }
 
 h2 {
+  font-family: var(--serif);
   font-size: 15px;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  text-decoration: underline;
-  text-underline-offset: 4px;
+  text-decoration: none;
   margin: 0 0 1em;
 }
 
@@ -552,6 +557,7 @@ video {
   }
 
   h2 {
+    font-family: var(--serif);
     font-size: 13px;
     margin: 1em 0 0.3em;
     border-bottom: 1px solid #333;
