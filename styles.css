@@ -287,6 +287,64 @@ h2 {
   font-style: normal;
 }
 
+.pub-list {
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+}
+
+.pub-list li {
+  margin-bottom: 18px;
+  padding-left: 0;
+}
+
+.pub-list li::before {
+  content: none;
+}
+
+.pub-list .pub-authors,
+.pub-list .pub-venue,
+.pub-list .pub-links {
+  margin-top: 4px;
+}
+
+.fold {
+  margin-top: 12px;
+}
+
+.fold summary {
+  cursor: pointer;
+  font-family: var(--serif);
+  font-size: 14px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--blue);
+  list-style: none;
+}
+
+.fold summary::-webkit-details-marker {
+  display: none;
+}
+
+.fold summary:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
+}
+
+.fold summary::before {
+  content: "+ ";
+  color: var(--blue-soft);
+}
+
+.fold[open] summary::before {
+  content: "– ";
+}
+
+.fold .teaching,
+.fold .pub-list {
+  margin-top: 12px;
+}
+
 /* Lists */
 ul {
   list-style: none;
