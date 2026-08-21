@@ -96,13 +96,18 @@ a:focus-visible {
   text-transform: uppercase;
 }
 
-.site-header a {
+.site-header nav a {
   text-decoration: none;
 }
 
-.site-header a:hover {
+.site-header nav a:hover {
   text-decoration: underline;
   text-underline-offset: 4px;
+}
+
+a.site-contact {
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .container {
@@ -136,12 +141,12 @@ section {
 }
 
 h2 {
+  font-family: var(--serif);
   font-size: 15px;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  text-decoration: underline;
-  text-underline-offset: 4px;
+  text-decoration: none;
   margin: 0 0 1em;
 }
 
@@ -285,6 +290,73 @@ h2 {
 .spotlight {
   font-weight: bold;
   font-style: normal;
+}
+
+.pub-list {
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+}
+
+.pub-list li {
+  margin-bottom: 18px;
+  padding-left: 0;
+}
+
+.pub-list li::before {
+  content: none;
+}
+
+.pub-list .pub-authors,
+.pub-list .pub-venue,
+.pub-list .pub-links {
+  margin-top: 4px;
+}
+
+.pub-year {
+  font-family: var(--serif);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  margin: 1em 0 0.4em;
+}
+
+.fold {
+  border-top: 1px dashed var(--blue);
+  margin-top: 30px;
+  padding-top: 22px;
+}
+
+.fold summary {
+  cursor: pointer;
+  font-family: var(--serif);
+  font-size: 14px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--blue);
+  list-style: none;
+}
+
+.fold summary::-webkit-details-marker {
+  display: none;
+}
+
+.fold summary:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
+}
+
+.fold summary::before {
+  content: "+ ";
+  color: var(--blue-soft);
+}
+
+.fold[open] summary::before {
+  content: "– ";
+}
+
+.fold .pub-list {
+  margin-top: 8px;
 }
 
 /* Lists */
@@ -494,6 +566,7 @@ video {
   }
 
   h2 {
+    font-family: var(--serif);
     font-size: 13px;
     margin: 1em 0 0.3em;
     border-bottom: 1px solid #333;
