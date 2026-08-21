@@ -73,15 +73,15 @@
         <span class="kicker">Postdoctoral Researcher - Reinforcement Learning & Robotics</span>
         <h1>Dr. Frank Röder</h1>
         <p>
-          I am a postdoctoral researcher at the
+          I build agents that learn transferable behavior from interaction. At the
           <a href="https://www.tuhh.de/dsf/homepage" target="_blank" rel="noopener">Institute for Data Science Foundations</a> at the
           <a href="https://www.tuhh.de/" target="_blank" rel="noopener">Hamburg University of Technology</a>,
-          under the supervision of Prof. Nihat Ay. I research sequential decision-making, world modeling, and causality,
-          and teach mathematics, machine learning, and reinforcement learning.
+          I work with Prof. Nihat Ay on world models and sequential decision-making: contextual representations that
+          generalize zero-shot to unseen dynamics, and grounding natural language in embodied control.
         </p>
         <p>
           I received my Dr. rer. nat. in reinforcement learning and language grounding in robotics under the supervision
-          of Dr. Manfred Eppe (2021–2025) and Prof. Stefan Wermter (2021–2022).
+          of Dr. Manfred Eppe (2021–2025), Prof. Stefan Wermter (2021–2022), and Prof. Nihat Ay.
         </p>
         <p>
           If you are looking for thesis supervision, please apply via our institute homepage.
@@ -160,9 +160,48 @@
           </p>
         </div>
       </div>
+    </section>
 
-      <details class="fold">
-        <summary>All publications</summary>
+    <section>
+      <h2>Dissertation</h2>
+      <div class="publication compact">
+        <div class="pub-gif-wrap">
+          <video class="pub-gif" width="460" height="374" autoplay muted loop playsinline
+                 aria-label="Robot arm told to shift the blue object but pushing the red cube">
+            <source src="assets/wrong_object.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="pub-text">
+          <h3 class="papertitle">
+            <a target="_blank" rel="noopener" href="https://doi.org/10.15480/882.17098">
+              Language Grounding in Deep Reinforcement Learning for Dynamic Goal-Oriented Robotics
+            </a>
+          </h3>
+          <p class="pub-authors"><strong>Frank Röder</strong></p>
+          <p class="pub-venue">Doctoral Thesis, Hamburg University of Technology (TUHH), 2026</p>
+          <p class="pub-committee">Reviewers: Prof. Dr. rer. nat. Nihat Ay, Prof. Dr. Pierre-Alexandre Murena</p>
+          <p class="pub-links">
+            <a target="_blank" rel="noopener" href="https://doi.org/10.15480/882.17098">DOI</a>
+            <a target="_blank" rel="noopener" href="https://github.com/frankroeder/language-conditioned-rl">RL Algorithms</a>
+            <a target="_blank" rel="noopener" href="https://github.com/frankroeder/lanro-gym">Robotics Simulation</a>
+          </p>
+          <p class="pub-abstract">
+            Language is the primary medium for instructing embodied agents, yet
+            robots struggle to ground natural language robustly under
+            conversational noise such as disfluencies and polysemy. This thesis
+            studies these limitations in a sparse-reward, language-conditioned
+            reinforcement learning setup, using linguistic feedback and
+            egocentric speech to learn from failure in hindsight — relabeling
+            unintended deviations as alternative goals and predicting goal
+            commands that match the observed behavior.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <details class="fold">
+      <summary>All publications</summary>
+        <h3 class="pub-year">2026</h3>
         <ol class="pub-list">
           <li>
             <h3 class="papertitle">
@@ -189,6 +228,9 @@
               <a target="_blank" rel="noopener" href="https://doi.org/10.15480/882.17098">DOI</a>
             </p>
           </li>
+        </ol>
+        <h3 class="pub-year">2025</h3>
+        <ol class="pub-list">
           <li>
             <h3 class="papertitle">
               <a target="_blank" rel="noopener" href="https://openreview.net/forum?id=41bIzD5sit">
@@ -248,6 +290,9 @@
               <a target="_blank" rel="noopener" href="https://github.com/Scilab-RL/Scilab-RL">Code</a>
             </p>
           </li>
+        </ol>
+        <h3 class="pub-year">2022</h3>
+        <ol class="pub-list">
           <li>
             <h3 class="papertitle">
               <a target="_blank" rel="noopener" href="https://openreview.net/forum?id=lWd0qiv9E-">
@@ -291,6 +336,9 @@
               <a target="_blank" rel="noopener" href="https://doi.org/10.1093/brain/awab453">DOI</a>
             </p>
           </li>
+        </ol>
+        <h3 class="pub-year">2021</h3>
+        <ol class="pub-list">
           <li>
             <h3 class="papertitle">
               <a target="_blank" rel="noopener" href="https://doi.org/10.3389/fpsyg.2021.716671">
@@ -303,6 +351,9 @@
               <a target="_blank" rel="noopener" href="https://doi.org/10.3389/fpsyg.2021.716671">DOI</a>
             </p>
           </li>
+        </ol>
+        <h3 class="pub-year">2020</h3>
+        <ol class="pub-list">
           <li>
             <h3 class="papertitle">
               <a target="_blank" rel="noopener" href="https://doi.org/10.1007/978-3-030-61616-8_33">
@@ -317,50 +368,11 @@
             </p>
           </li>
         </ol>
-      </details>
-    </section>
-
-    <section>
-      <h2>Dissertation</h2>
-      <div class="publication compact">
-        <div class="pub-gif-wrap">
-          <video class="pub-gif" width="460" height="374" autoplay muted loop playsinline
-                 aria-label="Robot arm told to shift the blue object but pushing the red cube">
-            <source src="assets/wrong_object.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="pub-text">
-          <h3 class="papertitle">
-            <a target="_blank" rel="noopener" href="https://doi.org/10.15480/882.17098">
-              Language Grounding in Deep Reinforcement Learning for Dynamic Goal-Oriented Robotics
-            </a>
-          </h3>
-          <p class="pub-authors"><strong>Frank Röder</strong></p>
-          <p class="pub-venue">Doctoral Thesis, Hamburg University of Technology (TUHH), 2026</p>
-          <p class="pub-committee">Reviewers: Prof. Dr. rer. nat. Nihat Ay, Prof. Dr. Pierre-Alexandre Murena</p>
-          <p class="pub-links">
-            <a target="_blank" rel="noopener" href="https://doi.org/10.15480/882.17098">DOI</a>
-            <a target="_blank" rel="noopener" href="https://github.com/frankroeder/language-conditioned-rl">RL Algorithms</a>
-            <a target="_blank" rel="noopener" href="https://github.com/frankroeder/lanro-gym">Robotics Simulation</a>
-          </p>
-          <p class="pub-abstract">
-            Language is the primary medium for instructing embodied agents, yet
-            robots struggle to ground natural language robustly under
-            conversational noise such as disfluencies and polysemy. This thesis
-            studies these limitations in a sparse-reward, language-conditioned
-            reinforcement learning setup, using linguistic feedback and
-            egocentric speech to learn from failure in hindsight — relabeling
-            unintended deviations as alternative goals and predicting goal
-            commands that match the observed behavior.
-          </p>
-        </div>
-      </div>
-    </section>
+    </details>
 
     <section>
       <h2>Activities &amp; News</h2>
       <ul class="news">
-        <li><time class="date" datetime="2026-06">06/2026</time> Started as a postdoctoral researcher at the <a href="https://www.tuhh.de/dsf/homepage" target="_blank" rel="noopener">Institute for Data Science Foundations</a>, Hamburg University of Technology.</li>
         <li><time class="date" datetime="2026-02-10">02/2026</time> Defended my PhD (Dr. rer. nat.) on 10.02.2026.</li>
         <li><time class="date" datetime="2026-02-06">02/2026</time> Posted the preprint <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2602.06550">Dynamics-Aligned Shared Hypernetworks for Contextual RL under Discontinuous Shifts</a> (arXiv:2602.06550).</li>
         <li><time class="date" datetime="2025-12">12/2025</time> Attended NeurIPS 2025 in San Diego, CA, with two accepted papers.</li>
@@ -414,36 +426,31 @@
           <span class="term">WS 2024/25</span> Tutor, Mathematics I,
           <a href="https://www.mat.tuhh.de" target="_blank" rel="noopener">Institute for Mathematics</a>
         </li>
+        <li>
+          <span class="term">SS 2024</span> Tutor, Introduction to Reinforcement Learning Seminar,
+          <a href="https://www.tuhh.de/dsf/homepage" target="_blank" rel="noopener">Institute for Data Science Foundations</a>
+        </li>
+        <li>
+          <span class="term">SS 2023</span> Tutor, Introduction to Reinforcement Learning Seminar,
+          <a href="https://www.tuhh.de/dsf/homepage" target="_blank" rel="noopener">Institute for Data Science Foundations</a>
+        </li>
+        <li>
+          <span class="term">SS 2022</span> Supervisor, Neural Networks Seminar,
+          <a href="https://www.inf.uni-hamburg.de/en/inst/ab/wtm/" target="_blank" rel="noopener">Knowledge Technology Group</a>
+        </li>
+        <li>
+          <span class="term">WS 2021/22</span> Supervisor, Bio-Inspired Artificial Intelligence Seminar,
+          <a href="https://www.inf.uni-hamburg.de/en/inst/ab/wtm/" target="_blank" rel="noopener">Knowledge Technology Group</a>
+        </li>
+        <li>
+          <span class="term">SS 2021</span> Supervisor, Neural Networks Seminar,
+          <a href="https://www.inf.uni-hamburg.de/en/inst/ab/wtm/" target="_blank" rel="noopener">Knowledge Technology Group</a>
+        </li>
+        <li>
+          <span class="term">WS 2020/21</span> Supervisor, Bio-Inspired Artificial Intelligence Seminar,
+          <a href="https://www.inf.uni-hamburg.de/en/inst/ab/wtm/" target="_blank" rel="noopener">Knowledge Technology Group</a>
+        </li>
       </ul>
-      <details class="fold">
-        <summary>Earlier teaching (2020–2024)</summary>
-        <ul class="teaching">
-          <li>
-            <span class="term">SS 2024</span> Tutor, Introduction to Reinforcement Learning Seminar,
-            <a href="https://www.tuhh.de/dsf/homepage" target="_blank" rel="noopener">Institute for Data Science Foundations</a>
-          </li>
-          <li>
-            <span class="term">SS 2023</span> Tutor, Introduction to Reinforcement Learning Seminar,
-            <a href="https://www.tuhh.de/dsf/homepage" target="_blank" rel="noopener">Institute for Data Science Foundations</a>
-          </li>
-          <li>
-            <span class="term">SS 2022</span> Supervisor, Neural Networks Seminar,
-            <a href="https://www.inf.uni-hamburg.de/en/inst/ab/wtm/" target="_blank" rel="noopener">Knowledge Technology Group</a>
-          </li>
-          <li>
-            <span class="term">WS 2021/22</span> Supervisor, Bio-Inspired Artificial Intelligence Seminar,
-            <a href="https://www.inf.uni-hamburg.de/en/inst/ab/wtm/" target="_blank" rel="noopener">Knowledge Technology Group</a>
-          </li>
-          <li>
-            <span class="term">SS 2021</span> Supervisor, Neural Networks Seminar,
-            <a href="https://www.inf.uni-hamburg.de/en/inst/ab/wtm/" target="_blank" rel="noopener">Knowledge Technology Group</a>
-          </li>
-          <li>
-            <span class="term">WS 2020/21</span> Supervisor, Bio-Inspired Artificial Intelligence Seminar,
-            <a href="https://www.inf.uni-hamburg.de/en/inst/ab/wtm/" target="_blank" rel="noopener">Knowledge Technology Group</a>
-          </li>
-        </ul>
-      </details>
     </section>
 
     <section>
@@ -469,12 +476,21 @@
     </section>
 
     <section>
+      <h2>Collaborations</h2>
+      <ul>
+        <li>
+          <a href="https://jager.studio" target="_blank" rel="noopener">jager.studio</a>
+          — Collaboration.
+        </li>
+      </ul>
+    </section>
+
+    <section>
       <h2>Music</h2>
       <ul>
         <li>
-          <a href="https://linktr.ee/A100band" target="_blank" rel="noopener">
-            A100 - A Trip Hop, Nu Jazz and Electronic Music Project
-          </a>
+          <a href="https://linktr.ee/A100band" target="_blank" rel="noopener">A100</a>
+          — Trip Hop, Nu Jazz, and electronic music.
         </li>
         <li>
           <a href="https://vimeo.com/333599702" target="_blank" rel="noopener">

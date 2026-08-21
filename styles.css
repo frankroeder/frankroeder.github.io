@@ -313,8 +313,18 @@ h2 {
   margin-top: 4px;
 }
 
+.pub-year {
+  font-family: var(--serif);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  margin: 1em 0 0.4em;
+}
+
 .fold {
-  margin-top: 12px;
+  border-top: 1px dashed var(--blue);
+  margin-top: 30px;
+  padding-top: 22px;
 }
 
 .fold summary {
@@ -345,9 +355,8 @@ h2 {
   content: "– ";
 }
 
-.fold .teaching,
 .fold .pub-list {
-  margin-top: 12px;
+  margin-top: 8px;
 }
 
 /* Lists */
