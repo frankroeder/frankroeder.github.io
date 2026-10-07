@@ -100,6 +100,7 @@ a:focus-visible {
   text-decoration: none;
 }
 
+.site-header a:focus,
 .site-header a:hover {
   text-decoration: underline;
   text-underline-offset: 4px;
@@ -136,12 +137,11 @@ section {
 }
 
 h2 {
-  font-size: 15px;
+  font-family: var(--serif);
+  font-size: 16px;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  text-decoration: underline;
-  text-underline-offset: 4px;
   margin: 0 0 1em;
 }
 
@@ -285,6 +285,66 @@ h2 {
 .spotlight {
   font-weight: bold;
   font-style: normal;
+}
+
+/* Full publication list: folded by default, grouped by year */
+.fold summary {
+  cursor: pointer;
+  width: fit-content;
+  font-size: 13.5px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  list-style: none;
+}
+
+.fold summary::-webkit-details-marker {
+  display: none;
+}
+
+.fold summary::before {
+  content: "+ ";
+  color: var(--blue-soft);
+}
+
+.fold[open] summary::before {
+  content: "– ";
+}
+
+.fold summary:hover {
+  text-decoration: underline dashed;
+  text-underline-offset: 3px;
+}
+
+.fold summary:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
+}
+
+.pub-year {
+  font-family: var(--serif);
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  margin: 1.2em 0 0.4em;
+}
+
+.pub-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.pub-list li {
+  padding-left: 0;
+  margin-bottom: 14px;
+}
+
+.pub-list li::before {
+  content: none;
+}
+
+.pub-list p {
+  margin: 2px 0 0;
 }
 
 /* Lists */
@@ -507,8 +567,18 @@ video {
   }
 
   /* Videos do not render reliably in print; drop them from the CV output. */
-  .pub-gif-wrap {
+  .pub-gif-wrap,
+  .fold summary {
     display: none;
+  }
+
+  .pub-year {
+    page-break-after: avoid;
+  }
+
+  .pub-list li {
+    page-break-inside: avoid;
+    margin-bottom: 6px;
   }
 
   a {
