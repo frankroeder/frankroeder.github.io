@@ -391,23 +391,28 @@
           <span class="term">SS 2023</span> Tutor, Introduction to Reinforcement Learning Seminar,
           <a href="https://www.tuhh.de/dsf/homepage" target="_blank" rel="noopener">Institute for Data Science Foundations</a>
         </li>
-        <li>
-          <span class="term">SS 2022</span> Supervisor, Neural Networks Seminar,
-          <a href="https://www.inf.uni-hamburg.de/en/inst/ab/wtm/" target="_blank" rel="noopener">Knowledge Technology Group</a>
-        </li>
-        <li>
-          <span class="term">WS 2021/22</span> Supervisor, Bio-Inspired Artificial Intelligence Seminar,
-          <a href="https://www.inf.uni-hamburg.de/en/inst/ab/wtm/" target="_blank" rel="noopener">Knowledge Technology Group</a>
-        </li>
-        <li>
-          <span class="term">SS 2021</span> Supervisor, Neural Networks Seminar,
-          <a href="https://www.inf.uni-hamburg.de/en/inst/ab/wtm/" target="_blank" rel="noopener">Knowledge Technology Group</a>
-        </li>
-        <li>
-          <span class="term">WS 2020/21</span> Supervisor, Bio-Inspired Artificial Intelligence Seminar,
-          <a href="https://www.inf.uni-hamburg.de/en/inst/ab/wtm/" target="_blank" rel="noopener">Knowledge Technology Group</a>
-        </li>
       </ul>
+      <details class="fold">
+        <summary>Earlier teaching (2020–2022)</summary>
+        <ul class="teaching">
+          <li>
+            <span class="term">SS 2022</span> Supervisor, Neural Networks Seminar,
+            <a href="https://www.inf.uni-hamburg.de/en/inst/ab/wtm/" target="_blank" rel="noopener">Knowledge Technology Group</a>
+          </li>
+          <li>
+            <span class="term">WS 2021/22</span> Supervisor, Bio-Inspired Artificial Intelligence Seminar,
+            <a href="https://www.inf.uni-hamburg.de/en/inst/ab/wtm/" target="_blank" rel="noopener">Knowledge Technology Group</a>
+          </li>
+          <li>
+            <span class="term">SS 2021</span> Supervisor, Neural Networks Seminar,
+            <a href="https://www.inf.uni-hamburg.de/en/inst/ab/wtm/" target="_blank" rel="noopener">Knowledge Technology Group</a>
+          </li>
+          <li>
+            <span class="term">WS 2020/21</span> Supervisor, Bio-Inspired Artificial Intelligence Seminar,
+            <a href="https://www.inf.uni-hamburg.de/en/inst/ab/wtm/" target="_blank" rel="noopener">Knowledge Technology Group</a>
+          </li>
+        </ul>
+      </details>
     </section>
 
     <section>
@@ -475,11 +480,18 @@
     });
 
     // CSS cannot stop a <video>, so honour prefers-reduced-motion here.
+    const videos = document.querySelectorAll('video');
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      for (const video of document.querySelectorAll('video')) {
+      for (const video of videos) {
         video.removeAttribute('autoplay');
         video.pause();
       }
+    } else {
+      // Otherwise only play videos while they are on screen, to save CPU and battery.
+      const observer = new IntersectionObserver((entries) => {
+        for (const e of entries) e.isIntersecting ? e.target.play() : e.target.pause();
+      });
+      for (const video of videos) observer.observe(video);
     }
   </script>
 </body>
