@@ -287,7 +287,7 @@ h2 {
   font-style: normal;
 }
 
-/* Full publication list: folded by default, grouped by year */
+/* Folded content (earlier teaching) */
 .fold summary {
   cursor: pointer;
   width: fit-content;
@@ -318,33 +318,6 @@ h2 {
 .fold summary:focus-visible {
   outline: 2px solid var(--blue);
   outline-offset: 3px;
-}
-
-.pub-year {
-  font-family: var(--serif);
-  font-size: 15px;
-  font-weight: 400;
-  letter-spacing: 0.06em;
-  margin: 1.2em 0 0.4em;
-}
-
-.pub-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.pub-list li {
-  padding-left: 0;
-  margin-bottom: 14px;
-}
-
-.pub-list li::before {
-  content: none;
-}
-
-.pub-list p {
-  margin: 2px 0 0;
 }
 
 /* Lists */
@@ -570,15 +543,6 @@ video {
   .pub-gif-wrap,
   .fold summary {
     display: none;
-  }
-
-  .pub-year {
-    page-break-after: avoid;
-  }
-
-  .pub-list li {
-    page-break-inside: avoid;
-    margin-bottom: 6px;
   }
 
   a {
