@@ -539,7 +539,7 @@ video {
     margin-bottom: 10px;
   }
 
-  /* Videos do not render reliably in print; drop them from the CV output. */
+  /* Videos do not render reliably in print; drop them and fold toggles from the CV output. */
   .pub-gif-wrap,
   .fold summary {
     display: none;
