@@ -343,7 +343,7 @@ li::before {
 /* Dated lists: mono date column, no bullet. Wrapped lines are indented to
    align with the description text (hanging indent under the date column). */
 .news { --col: 5rem; }
-.teaching { --col: 6rem; }
+.teaching { --col: 6.8rem; }
 .timeline { --col: 9.4rem; }
 
 .news li,
